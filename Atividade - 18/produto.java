@@ -1,0 +1,70 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+ 
+ 
+public class produto extends JDialog{
+	JLabel lbTitle, lbProd, lbCateg, lbValor, lbDesc, lbQuant;
+	JTextField txPro, txProd, txCateg, txValor, txDesc, txQuant;
+	JButton btSalvar;
+	public produto () {
+		this.setTitle("Produto");
+		this.setSize (500,500);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		this.getContentPane().setBackground(Color.GRAY.darker());
+		this.setModal(true);
+		lbTitle = new JLabel ();
+		lbTitle.setBounds(190, 30, 150, 25);
+		lbTitle.setText("Gerenciar Produtos");
+		lbTitle.setBackground(Color.white);
+		add(lbTitle);
+		lbProd = new JLabel();
+		lbProd.setBounds(50, 100, 150, 25);
+		lbProd.setText("Produto: "); 
+		lbProd.setBackground(Color.white);
+		add(lbProd);
+		txPro = new JTextField();
+		txPro.setBounds(150, 100, 200, 25);
+		add(txPro);
+		lbCateg = new JLabel();
+		lbCateg.setBounds(50, 150, 150, 25);
+		lbCateg.setText("Categoria: ");
+		lbCateg.setBackground(Color.white);
+		add(lbCateg);
+		txCateg = new JTextField();
+		txCateg.setBounds(150, 150, 200, 25);
+		add(txCateg);
+		lbValor = new JLabel();
+		lbValor.setBounds(50, 200, 150, 25);
+		lbValor.setText("Valor: ");
+		lbValor.setBackground(Color.white);
+		add(lbValor);
+		txValor = new JTextField();
+		txValor.setBounds(150, 200, 200, 25);
+		add(txValor);
+		lbDesc = new JLabel();
+		lbDesc.setBounds(50, 250, 150, 25);
+		lbDesc.setText("Descrição: ");
+		lbDesc.setBackground(Color.white);
+		add(lbDesc);
+		txDesc = new JTextField();
+		txDesc.setBounds(150, 250, 200, 25);
+		add(txDesc);
+		lbQuant = new JLabel();
+		lbQuant.setBounds(50, 300, 150, 25);
+		lbQuant.setText("Quantidade: ");
+		lbQuant.setBackground(Color.white);
+		add(lbQuant);
+		txQuant = new JTextField();
+		txQuant.setBounds(150, 300, 200, 25);
+		add(txQuant);
+		btSalvar= new JButton();
+		btSalvar.setBounds(190, 350, 100, 25);
+		btSalvar.setText("Salvar");
+		add(btSalvar);
+		this.setLayout(null);
+		this.setVisible(true);
+	}
+}
