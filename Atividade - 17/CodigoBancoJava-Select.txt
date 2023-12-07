@@ -1,0 +1,100 @@
+banco: dbLojaGuaia
+
+create table tbCategoria(
+	idCategoria int primary key auto_increment,
+	categoria varchar(40)
+);
+
+
+insert into tbCategoria values
+	(null,'Brinquedo'),
+	(null,'Eletrônico'),
+	(null,'Ferramentas'),
+	(null,'Saúde');
+
+---------------------------------------------------------
+
+import java.sql.DriverManager;
+import java.sql.SQLException; 
+import java.sql.Connection;
+
+public class Conexao {
+    
+       //cria uma conexao chamada con
+	   static Connection con;   
+
+	    //metodo responsavel para se conectar ao bd   
+	    public void conectar(){
+	        try{
+	           //para carregar o driver
+	           Class.forName("com.mysql.jdbc.Driver");
+
+	           //jdbc - e o driver da sun responsavel pela conexao
+	           //estabelece uma conexao 
+	           con = DriverManager.getConnection("jdbc:mysql://localhost/dbLojaGuaia","root","");
+
+	           System.out.println("Conexão realizada com sucesso.");
+	        }
+	         catch(ClassNotFoundException ex){
+		        System.out.println("Driver JDBC-ODBC não encontrado"); 
+		    }	         
+	         catch(SQLException ex){
+	           System.out.println("Problemas na conexão com o banco de dados."); 
+	        }         
+	    }
+
+	    public void desconectar(){
+	         try{	           
+	           con.close();
+	           System.out.println("Conexao finalizada com sucesso");
+	         }
+	         catch(SQLException ex){
+	            System.out.println("Problemas ao encerrar a conexão."); 
+	         }
+	    }
+    
+}
+
+----------------------------------------------------------------------------
+
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import com.mysql.jdbc.Statement;
+
+public class Aplicacao{
+   
+    public static void main(String[] args) {
+        
+		//controla e executa uma instruçao sql
+		Statement state;
+			
+		//conjunto de dados retornado por uma consulta sql
+		ResultSet resultset;
+	
+		//instancia o objeto conex da classe Conexao
+		Conexao conex = new Conexao();     
+	
+		String sql = "select * from tbCategoria";
+					
+		conex.conectar();      
+					
+		try{                  
+				
+			state = (Statement) Conexao.con.createStatement();
+			resultset = state.executeQuery(sql);
+				
+				while(resultset.next()){
+					//System.out.print(" "+resultset.getString("nomeDaColuna"));
+					System.out.print(" "+resultset.getString(1));
+					System.out.print(" "+resultset.getString(2)+"\n");
+				}                         
+		}
+		catch(SQLException erro){
+			System.out.println("Nao foi possível realizar a consulta");
+		}     
+			
+		conex.desconectar();
+    }    
+}
+
